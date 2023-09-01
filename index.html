@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dropdown Example</title>
+<style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="dropdown">
+  <button>Open Dropdown</button>
+  <div class="dropdown-content" id="dropdownContent">
+  </div>
+</div>
+
+<script>
+  const array = [
+    { name: "anil", type: "it" },
+    { name: "anil1", type: "it" },
+    { name: "anil2", type: "ite" },
+    { name: "anil3", type: "it" },
+    { name: "anil4", type: "ite" },
+    { name: "anil5", type: "ite" },
+  ];
+
+  const dropdownContent = document.getElementById('dropdownContent');
+
+  const types = Array.from(new Set(array.map(item => item.type)));
+
+  types.forEach(type => {
+    const typeHeading = document.createElement('h2');
+    typeHeading.textContent = type;
+    dropdownContent.appendChild(typeHeading);
+
+    const namesOfType = array.filter(item => item.type === type).map(item => item.name);
+    const namesList = document.createElement('ul');
+
+    namesOfType.forEach(name => {
+      const nameItem = document.createElement('li');
+      nameItem.textContent = name;
+      namesList.appendChild(nameItem);
+    });
+
+    dropdownContent.appendChild(namesList);
+  });
+</script>
+</body>
+</html>
